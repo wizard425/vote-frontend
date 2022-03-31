@@ -1,0 +1,16 @@
+The project regards a voting app.
+There is a main page with login/signup, and the user can choose two
+different roles when signing up: Voter or Manager.
+Voter can only vote polls, Manager can create them.
+Multiple polls are grouped into Poll Sessions.
+When the user logs in, he sees different view depending on if he's a Voter or a Manager.
+In the Manager page, he sees a list of the Poll Sessions he created, and he can create more; if he pres the View button of a specific
+poll session, he goes into the Poll Session page, where he sees all the polls associated with that poll session, and he can create more; he also
+sees a list of all the voters of this poll session, and he can add more.
+When he clicks on a specific poll, he can see the state (CREATED,  STARTED, CLOSED, TALLIED) and the question with the possible choice; here
+he can modify poll state, question and choices, and make tally.
+In the Voter page, the voter sees all the Poll session he's registered to, plus a License square in the top-right corner; clicking on the license,
+a popup opens up, and he can choose to request license or connect a license.
+If the Voter clicks on any Poll session, he can see the polls of that poll session, and if voting is allowed, a button "VOTE" appears.
+In the Vote page, the user sees the choices ( polls can be multiple or single choice), he select all the choices he wants, then he click a Submit button.
+When he clicks the Submit button, choices freeze up, and then a password field and a Vote button appear; he enters the password, and click Vote, and vote is sent.
