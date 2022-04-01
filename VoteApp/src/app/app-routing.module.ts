@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { ManagerviewComponent } from './managerview/managerview.component';
 import { PollSessionDetailComponent } from './managerview/poll-session-detail/poll-session-detail.component';
 import { RegisterComponent } from './register/register.component';
+import { PollSessionDetailVoterComponent } from './voterview/poll-session-detail-voter/poll-session-detail-voter.component';
 import { VoterviewComponent } from './voterview/voterview.component';
 
 const routes: Routes = [
@@ -28,14 +29,27 @@ const routes: Routes = [
         component: ManagerviewComponent
       },
       {
-        path: "pollsession/:id",
+        path: ":id",
+        component: PollSessionDetailComponent
+      },
+      {
+        path: ":id/:pollid",
         component: PollSessionDetailComponent
       }
     ]
   },
   {
     path: "voter",
-    component: VoterviewComponent
+    children: [
+      {
+        path: "",
+        component: VoterviewComponent
+      },
+      {
+        path: ":id",
+        component: PollSessionDetailVoterComponent
+      }
+    ]
   }
 ];
 

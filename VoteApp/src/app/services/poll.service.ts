@@ -15,7 +15,12 @@ export class PollService {
       polls: [
         {
           id: "001234",
-          status: PollStatus.created,
+          status: PollStatus.started,
+          title: "Who is the best?"
+        },
+        {
+          id: "001234",
+          status: PollStatus.tallied,
           title: "Who is the best?"
         }
       ],

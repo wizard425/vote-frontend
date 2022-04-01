@@ -10,6 +10,8 @@ import { ManagerviewComponent } from './managerview/managerview.component';
 import { VoterviewComponent } from './voterview/voterview.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PollSessionDetailComponent } from './managerview/poll-session-detail/poll-session-detail.component';
+import { PollSessionDetailVoterComponent } from './voterview/poll-session-detail-voter/poll-session-detail-voter.component';
+import { VoteViewComponent } from './voterview/vote-view/vote-view.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { PollSessionDetailComponent } from './managerview/poll-session-detail/po
     ManagerviewComponent,
     VoterviewComponent,
     LandingPageComponent,
-    PollSessionDetailComponent
+    PollSessionDetailComponent,
+    PollSessionDetailVoterComponent,
+    VoteViewComponent
   ],
   imports: [
     BrowserModule,
