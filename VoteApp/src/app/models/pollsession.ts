@@ -1,6 +1,9 @@
 import { Poll } from "./poll";
 
 export class PollSession {
-    polls: Poll[] = []
+    id: string = "";
+    date: Date = new Date();
+    polls: Poll[] = [];
     status: string = "";
+    
 }

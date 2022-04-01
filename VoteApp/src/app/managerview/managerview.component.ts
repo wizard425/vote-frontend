@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PollSession } from '../models/pollsession';
+import { PollService } from '../services/poll.service';
 
 @Component({
   selector: 'vo-managerview',
@@ -8,11 +9,19 @@ import { PollSession } from '../models/pollsession';
 })
 export class ManagerviewComponent implements OnInit {
 
-  pollsessions : PollSession[] = [];
+  pollsessions: PollSession[] = [];
 
-  constructor() { }
+  constructor(private pollService: PollService) { }
 
   ngOnInit(): void {
+    console.log(this.pollsessions);
+    this.getAllPollsessions();
+  }
+
+  getAllPollsessions(){
+    this.pollService.getAllSessions().subscribe( pollsess => {
+      this.pollsessions = pollsess;
+    })
   }
 
 }
