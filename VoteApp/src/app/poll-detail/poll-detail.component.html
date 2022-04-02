@@ -1,0 +1,42 @@
+<div class="container w-75 p-2">
+    <h2 *ngIf="poll">Edit Poll N. {{poll.id}}</h2>
+    <h2 *ngIf="!poll && isManager">Create Poll</h2>
+
+    <form>
+        <div class="form-group">
+            <label for="idPollsession">Id</label>
+            <input type="text" class="form-control" id="idPollsession" placeholder="Enter id"
+                value="{{poll ? poll.id : ''}}">
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" placeholder="Date"
+                value="{{poll?.date | date: 'yyyy-dd-mm'}}" >
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Status</label>
+            <select class="form-control" id="exampleFormControlSelect1" [value]="poll ? poll.status : ''"
+                placeholder="status">
+                <option value="1">Created</option>
+                <option value="2">Started</option>
+                <option value="3">Closed</option>
+                <option value="4">Tallied</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title" value="{{poll ? poll.title : ''}}">
+        </div>
+
+
+        <div class="form-group" *ngFor="let ans of poll?.answers; index as i">
+            <label for="idPollsession">Choice {{i + 1}}</label>
+            <input type="text" class="form-control" id="idPollsession" placeholder="Enter Choice {{i}}"
+                value="{{ans.text}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

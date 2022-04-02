@@ -1,0 +1,24 @@
+<h2>Voting page</h2>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="jumbotron col-md-8">
+        <h3>Poll n. {{poll.id}}</h3>
+        <form>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let ans of poll.answers">
+                    <div class="radio">
+                        <label>
+                            <input type="checkbox">
+                            {{ans.text}}
+                        </label>
+                    </div>
+                </li>
+            </ul>
+            <div class="row">
+            <input class="col md-8" type="password" placeholder="Password">
+            <button type="button" class="btn btn-success col md-4" >Vote</button>
+        </div>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>

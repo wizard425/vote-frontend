@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
-import { ManagerviewComponent } from './managerview/managerview.component';
-import { PollSessionDetailComponent } from './managerview/poll-session-detail/poll-session-detail.component';
+import { PollDetailComponent } from './poll-detail/poll-detail.component';
+import { PollSessionDetailComponent } from './poll-session-detail/poll-session-detail.component';
+import { PollSessionsComponent } from './poll-sessions/poll-sessions.component';
 import { RegisterComponent } from './register/register.component';
-import { PollSessionDetailVoterComponent } from './voterview/poll-session-detail-voter/poll-session-detail-voter.component';
-import { VoterviewComponent } from './voterview/voterview.component';
+import { VoteComponent } from './vote/vote.component';
 
 const routes: Routes = [
   {
@@ -22,33 +22,28 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: "manager",
+    path: "home",
     children: [
       {
         path: "",
-        component: ManagerviewComponent
+        component: PollSessionsComponent
+      },
+      {
+        path: ":id/add",
+        component: PollDetailComponent
       },
       {
         path: ":id",
         component: PollSessionDetailComponent
       },
       {
-        path: ":id/:pollid",
-        component: PollSessionDetailComponent
-      }
-    ]
-  },
-  {
-    path: "voter",
-    children: [
-      {
-        path: "",
-        component: VoterviewComponent
+        path: ":id/edit/:pollid",
+        component: PollDetailComponent
       },
       {
-        path: ":id",
-        component: PollSessionDetailVoterComponent
-      }
+        path: ":id/vote/:pollid",
+        component: VoteComponent
+      },
     ]
   }
 ];
