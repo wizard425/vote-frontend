@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PollService {
+
+
+  // pollsessions and users = exampledata
   pollsessions = [
     {
       id: "1234557",
@@ -15,7 +17,8 @@ export class PollService {
           id: "001234",
           status: 1,
           title: "Who is the best?",
-          answers: [{
+          multipleChoice: true,
+          choices: [{
             id: "1",
             text: "Eric"
           }, {
@@ -24,13 +27,20 @@ export class PollService {
           }, {
             id: "3",
             text: "Marc"
+          }, {
+            id: "4",
+            text: "Gabri"
+          }, {
+            id: "5",
+            text: "Samuel"
           }]
         },
         {
           id: "001212",
           status: 1,
           title: "Who is the nicest?",
-          answers: [{
+          multipleChoice: false,
+          choices: [{
             id: "1",
             text: "Eric"
           }, {
@@ -43,7 +53,7 @@ export class PollService {
         }
       ],
       status: 'ended',
-      
+
     },
     {
       id: "12345",
@@ -84,6 +94,25 @@ export class PollService {
       status: 1
     }
   ]
+
+  users = [
+    {
+      id: "123",
+      username: "User 1"
+    },
+    {
+      id: "123",
+      username: "User 2"
+    },
+    {
+      id: "123",
+      username: "User 3"
+    },
+    {
+      id: "123",
+      username: "User 4"
+    }
+  ];
   constructor(private http: HttpClient) { }
 
   getAllPollSessions() {
@@ -94,9 +123,22 @@ export class PollService {
     return this.pollsessions.find(x => x.id == id);
   }
 
+  getUserOfPollSession(id: string){
+    return this.users;
+  }
+
   getPoll(pollsessionId: string, pollid: string) {
     let sess = this.pollsessions.find(x => x.id == pollsessionId);
     return sess?.polls.find(x => x.id == pollid);
+  }
+
+  get emptyPollSession() {
+    return {
+      id: "",
+      date: new Date(),
+      polls: [],
+      status: 'created'
+    };
   }
 
 }

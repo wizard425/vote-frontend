@@ -1,19 +1,8 @@
 <div class="container w-75 p-2">
-    <h2 *ngIf="poll">Edit Poll N. {{poll.id}}</h2>
+    <h2 *ngIf="poll">{{isNew ?  "New Poll" : "Edit Poll N. " + poll.id}}</h2>
     <h2 *ngIf="!poll && isManager">Create Poll</h2>
 
     <form>
-        <div class="form-group">
-            <label for="idPollsession">Id</label>
-            <input type="text" class="form-control" id="idPollsession" placeholder="Enter id"
-                value="{{poll ? poll.id : ''}}">
-        </div>
-        <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" placeholder="Date"
-                value="{{poll?.date | date: 'yyyy-dd-mm'}}" >
-        </div>
-
         <div class="form-group">
             <label for="exampleFormControlSelect1">Status</label>
             <select class="form-control" id="exampleFormControlSelect1" [value]="poll ? poll.status : ''"
@@ -25,18 +14,31 @@
             </select>
         </div>
 
-
+        <!--Title of poll-->
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" placeholder="Title" value="{{poll ? poll.title : ''}}">
         </div>
 
-
-        <div class="form-group" *ngFor="let ans of poll?.answers; index as i">
-            <label for="idPollsession">Choice {{i + 1}}</label>
-            <input type="text" class="form-control" id="idPollsession" placeholder="Enter Choice {{i}}"
-                value="{{ans.text}}">
+        <!--All choices, get displayed from poll.choices-->
+        <div class="form-group" *ngFor="let ans of poll?.choices; index as i">
+            <div class="row">
+                <div class="col-md-11 col-sm-11">
+                    <label for="idPollsession">Choice {{i + 1}}</label>
+                    <input type="text" class="form-control" id="idPollsession" placeholder="Enter Choice {{i + 1}}" maxlength="50"
+                        value="{{ans.text}}">
+                </div>
+                <!--Remove button, disabled when only 3 choices (3 choices are minimum)-->
+                <div class="col-md-1 col-sm-1 vcenter"> <button type="button" class="btn btn-default" [disabled]="poll?.choices.length == 3" 
+                    (click)="removeItem(i)">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </button></div>
+            </div>
         </div>
+        <button type="button" class="btn btn-default" (click)="poll?.choices.push({id: '', title: ''})">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"
+                ></span>
+        </button>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

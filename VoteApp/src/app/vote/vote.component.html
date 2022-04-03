@@ -5,10 +5,10 @@
         <h3>Poll n. {{poll.id}}</h3>
         <form>
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let ans of poll.answers">
+                <li class="list-group-item" *ngFor="let ans of poll.choices; index as i">
                     <div class="radio">
                         <label>
-                            <input type="checkbox">
+                            <input type="radio" name="{{poll.multipleChoice ? i : 1}}" id="{{ans.id}}">
                             {{ans.text}}
                         </label>
                     </div>

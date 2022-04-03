@@ -29,6 +29,10 @@ const routes: Routes = [
         component: PollSessionsComponent
       },
       {
+        path: "add",
+        component: PollSessionDetailComponent
+      },
+      {
         path: ":id/add",
         component: PollDetailComponent
       },

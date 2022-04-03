@@ -10,7 +10,9 @@ import { BaseComponent } from '../base/base.component';
 })
 export class PollSessionDetailComponent extends BaseComponent implements OnInit {
 
+  isNew: boolean = true;
   pollsession: any;
+  users: any;
 
   constructor(private pollService: PollService,
     private activatedRoute: ActivatedRoute) {
@@ -19,7 +21,14 @@ export class PollSessionDetailComponent extends BaseComponent implements OnInit 
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
-      this.pollsession = this.pollService.getPollSessionById(res.id);
+      let pollSess = this.pollService.getPollSessionById(res.id);
+      if(pollSess){
+        this.pollsession = pollSess;
+        this.users = this.pollService.getUserOfPollSession(res.id);
+        this.isNew = false;
+      }else{
+        this.pollsession = this.pollService.emptyPollSession;
+      }
     })
   }
 }
