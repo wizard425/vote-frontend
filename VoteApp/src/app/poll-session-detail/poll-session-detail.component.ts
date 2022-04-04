@@ -13,6 +13,7 @@ export class PollSessionDetailComponent extends BaseComponent implements OnInit 
   isNew: boolean = true;
   pollsession: any;
   users: any;
+  allUsers: any;
 
   constructor(private pollService: PollService,
     private activatedRoute: ActivatedRoute) {

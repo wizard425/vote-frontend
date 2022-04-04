@@ -20,6 +20,15 @@
             <input type="text" class="form-control" id="title" placeholder="Title" value="{{poll ? poll.title : ''}}">
         </div>
 
+        <div class="form-group">
+            <label for="multipleChoice">Mode</label>
+            <select class="form-control" id="multipleChoice" [value]="poll.multipleChoice"
+                placeholder="Mode">
+                <option value="false">Single-choice</option>
+                <option value="true">Multiple choice</option>
+            </select>
+        </div>
+
         <!--All choices, get displayed from poll.choices-->
         <div class="form-group" *ngFor="let ans of poll?.choices; index as i">
             <div class="row">

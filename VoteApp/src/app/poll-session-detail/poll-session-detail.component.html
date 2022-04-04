@@ -26,8 +26,8 @@
                     <div class="col-sm-3 vcenter">title: {{poll.title}}</div>
                     <div class="col-sm-4 vcenter">status: {{poll.status}}</div>
                     <div class="col-sm-2 vcenter">
-                        <a *ngIf="isManager" routerLink="{{'edit/' + poll.id}}" class="btn btn-primary btn-lg"
-                            role="button" aria-pressed="true">modify</a>
+                        <a *ngIf="isManager" routerLink="{{'edit/' + poll.id}}" class="btn btn-primary" role="button"
+                            aria-pressed="true">modify</a>
                         <a *ngIf="!isManager && poll.status == 1" routerLink="{{'vote/' + poll.id}}"
                             class="btn btn-success btn-lg" role="button" aria-pressed="true">vote</a>
                         <div *ngIf="!isManager && poll.status != 1">nichts</div>
@@ -44,7 +44,9 @@
                 <h3>User of Pollsession</h3>
             </div>
             <div *ngIf="isManager">
-                <a routerLink="add" class="btn btn-success btn-lg" role="button" aria-pressed="true">Add User</a>
+                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal">
+                    Manage Users
+                </button>
             </div>
         </div>
         <div class="panel-body">
@@ -57,4 +59,21 @@
         </div>
     </div>
 
+    <!-- Modal for license -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div *ngFor="let u of users">
+                        <label>
+                            <input type="checkbox">
+                            {{u.username}}
+                        </label>
+                    </div>
+                    <button class="btn btn-success" data-dismiss="modal">Add Users</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

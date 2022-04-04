@@ -5,24 +5,31 @@
         <form>
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let ans of poll.choices; index as i">
+                    <!--Buttons to choose-->
                     <div class="radio">
+                        <!--radio button if poll is single-choice-->
                         <label *ngIf="!poll.multipleChoice">
-                            <input type="radio" name="{{poll.multipleChoice ? i : 1}}" id="radio{{ans.id}}" [disabled]="submitted">
+                            <input type="radio" name="{{poll.multipleChoice ? ans.id : 1}}" id="radio{{ans.id}}"
+                                [disabled]="submitted">
                             {{ans.text}}
                         </label>
+                        <!--checkbox if poll is multiplechoice-->
                         <label *ngIf="poll.multipleChoice">
-                            <input type="checkbox" name="{{poll.multipleChoice ? i : 1}}" id="radio{{ans.id}}" [disabled]="submitted">
+                            <input type="checkbox" name="{{poll.multipleChoice ? ans.id: 1}}" id="radio{{ans.id}}"
+                                [disabled]="submitted">
                             {{ans.text}}
                         </label>
                     </div>
                 </li>
             </ul>
+            <!--submitted (variable in ts-class), defines if user pressed submit, if pressed, show passwordfield and votebutton-->
             <button *ngIf="!submitted" type="button" class="btn btn-primary" (click)="submitted = true">
                 Submit
             </button>
             <div class="row" *ngIf="submitted">
                 <div class="col-md-10">
-                    <input class="form-control" type="password" placeholder="Password" id="password" required>
+                    <input class="form-control" type="password" placeholder="Password" id="password" name="password"
+                        required>
                 </div>
                 <button type="submit" class="btn btn-success col-md-1">Vote</button>
             </div>
