@@ -19,4 +19,14 @@ export class PollSessionsComponent extends BaseComponent implements OnInit {
     this.pollsessions = this.pollService.getAllPollSessions();
   }
 
+  // gets called when user opens license-modal and clicks Request
+  requestLicense(){
+
+  }
+
+  // gets called when user opens license-modal and clicks Connect
+  connectLicense(){
+
+  }
+
 }

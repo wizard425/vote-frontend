@@ -1,24 +1,31 @@
-<h2>Voting page</h2>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="jumbotron col-md-8">
+<div class="container w-75 p-2">
+    <h2>Voting page</h2>
+    <div class="jumbotron">
         <h3>Poll n. {{poll.id}}</h3>
         <form>
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let ans of poll.choices; index as i">
                     <div class="radio">
-                        <label>
-                            <input type="radio" name="{{poll.multipleChoice ? i : 1}}" id="{{ans.id}}">
+                        <label *ngIf="!poll.multipleChoice">
+                            <input type="radio" name="{{poll.multipleChoice ? i : 1}}" id="radio{{ans.id}}" [disabled]="submitted">
+                            {{ans.text}}
+                        </label>
+                        <label *ngIf="poll.multipleChoice">
+                            <input type="checkbox" name="{{poll.multipleChoice ? i : 1}}" id="radio{{ans.id}}" [disabled]="submitted">
                             {{ans.text}}
                         </label>
                     </div>
                 </li>
             </ul>
-            <div class="row">
-            <input class="col md-8" type="password" placeholder="Password">
-            <button type="button" class="btn btn-success col md-4" >Vote</button>
-        </div>
+            <button *ngIf="!submitted" type="button" class="btn btn-primary" (click)="submitted = true">
+                Submit
+            </button>
+            <div class="row" *ngIf="submitted">
+                <div class="col-md-10">
+                    <input class="form-control" type="password" placeholder="Password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-success col-md-1">Vote</button>
+            </div>
         </form>
     </div>
-    <div class="col-md-2"></div>
 </div>

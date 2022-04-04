@@ -1,17 +1,21 @@
 <div class="login-form">
-  <form (submit)="signup()">
+  <form action="actionToCreateUser" method="post">
     <h2 class="text-center">Signup</h2>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Username" required="required">
+      <input type="text" class="form-control" placeholder="Username" required="required" id="username" name="username">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" placeholder="Password" required="required">
+      <input type="password" class="form-control" placeholder="Password" required="required" id="password"
+        name="password">
     </div>
     <div class="form-group">
       <input type="password" class="form-control" placeholder="Verify Password" required="required">
     </div>
     <div class="form-group">
-      <input>
+      <select class="form-control" name="ismanager" id="ismanager">
+        <option value="true">Manager</option>
+        <option value="false">Voter</option>
+      </select>
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary btn-block">Sign Up</button>

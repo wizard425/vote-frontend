@@ -11,6 +11,7 @@ import { PollService } from '../services/poll.service';
 export class VoteComponent extends BaseComponent implements OnInit {
 
   poll: any;
+  submitted: boolean = false;
 
   constructor(private pollService: PollService,
     private activatedRoute: ActivatedRoute) {

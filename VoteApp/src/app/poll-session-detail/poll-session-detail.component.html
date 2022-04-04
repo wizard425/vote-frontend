@@ -3,20 +3,13 @@
 
 
     <div *ngIf="isNew">
-
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" placeholder="Title">
         </div>
-
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Title">
-        </div>
-
-
     </div>
 
+    <!--List of polls in this pollsession-->
     <div class="panel panel-default">
         <div class="panel-heading">
             <div>
@@ -27,7 +20,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <div *ngFor="let poll of pollsession.polls" class="top7">
+            <div *ngFor="let poll of pollsession.polls" class="top7" style="height: 50px;">
                 <div class="d-flex justify-content-around spacing">
                     <div class="col-sm-3 vcenter">id: {{poll.id}}</div>
                     <div class="col-sm-3 vcenter">title: {{poll.title}}</div>
@@ -45,7 +38,7 @@
     </div>
 
     <!--List of users who subscribed to this Pollsession-->
-    <div class="panel panel-default">
+    <div *ngIf="isManager" class="panel panel-default">
         <div class="panel-heading">
             <div>
                 <h3>User of Pollsession</h3>

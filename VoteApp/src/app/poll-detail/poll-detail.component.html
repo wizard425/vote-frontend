@@ -1,5 +1,5 @@
 <div class="container w-75 p-2">
-    <h2 *ngIf="poll">{{isNew ?  "New Poll" : "Edit Poll N. " + poll.id}}</h2>
+    <h2 *ngIf="poll">{{isNew ? "New Poll" : "Edit Poll N. " + poll.id}}</h2>
     <h2 *ngIf="!poll && isManager">Create Poll</h2>
 
     <form>
@@ -25,20 +25,22 @@
             <div class="row">
                 <div class="col-md-11 col-sm-11">
                     <label for="idPollsession">Choice {{i + 1}}</label>
-                    <input type="text" class="form-control" id="idPollsession" placeholder="Enter Choice {{i + 1}}" maxlength="50"
-                        value="{{ans.text}}">
+                    <input type="text" class="form-control" id="idPollsession" placeholder="Enter Choice {{i + 1}}"
+                        maxlength="50" value="{{ans.text}}">
                 </div>
                 <!--Remove button, disabled when only 3 choices (3 choices are minimum)-->
-                <div class="col-md-1 col-sm-1 vcenter"> <button type="button" class="btn btn-default" [disabled]="poll?.choices.length == 3" 
-                    (click)="removeItem(i)">
+                <div class="col-md-1 col-sm-1 vcenter"> <button type="button" class="btn btn-default"
+                        [disabled]="poll?.choices.length == 3" (click)="removeItem(i)">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                     </button></div>
             </div>
         </div>
-        <button type="button" class="btn btn-default" (click)="poll?.choices.push({id: '', title: ''})">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"
-                ></span>
-        </button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <div class="row">
+            <button type="button" class="btn btn-default col-md-1 col-md-offset-11" (click)="poll?.choices.push({id: '', title: ''})">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

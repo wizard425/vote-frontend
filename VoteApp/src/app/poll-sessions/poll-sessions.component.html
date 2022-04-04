@@ -1,32 +1,41 @@
-<div class="container w-75 p-2">
+<div class="container w-75 p-2 mt-10">
 
-    <h2>{{ isManager ? "ManagerPage" : "UserPage"}}</h2>
+    <div class="row">
+        <h2 class="col-md-5">{{ isManager ? "ManagerPage" : "UserPage"}}</h2>
 
-    <!--License Button-->
-    <div class="row" *ngIf="!isManager">
-        <div class="col-sm-2">License State</div>
-        <div class="col-sm-2"><button type="button" class="btn btn-primary" data-toggle="modal"
-                data-target="#exampleModal">
-                View
-            </button></div>
+        <!--License Button-->
+        <div class="panel panel-default w-25 col-md-3 col-md-offset-4" style="margin-top: 10px;" *ngIf="!isManager">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">License State</div>
+                    <div class="col-md-4"><button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModal">
+                            View
+                        </button></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!--Create Pollsession button-->
-    <div *ngIf="isManager">
-        <a routerLink="add" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Create</a>
-    </div>
-
 
     <!--All Pollsessions listed-->
     <div class="panel panel-default w-75">
-        <div class="panel-heading">PollSessions</div>
+        <div class="panel-heading">
+            <div>
+                <h3>PollSessions</h3>
+            </div>
+            <!--Create Pollsession button-->
+            <div *ngIf="isManager">
+                <a routerLink="add" class="btn btn-success btn-lg" role="button" aria-pressed="true">Create
+                    PollSession</a>
+            </div>
+        </div>
         <div class="panel-body">
             <div *ngFor="let pollsess of pollsessions">
-                <div class="d-flex justify-content-around">
-                    <div class="col-sm-3">id: {{pollsess.id}}</div>
-                    <div class="col-sm-3">date: {{pollsess.date | date : "dd-MM-yyyy"}}</div>
-                    <div class="col-sm-3">status: {{pollsess.status}}</div>
-                    <div class="col-sm-3">
+                <div class="d-flex justify-content-around spacing">
+                    <div class="col-sm-3 vcenter">id: {{pollsess.id}}</div>
+                    <div class="col-sm-4 vcenter">date: {{pollsess.date | date : "dd-MM-yyyy"}}</div>
+                    <div class="col-sm-4 vcenter">status: {{pollsess.status}}</div>
+                    <div class="col-sm-1 vcenter">
                         <a routerLink="{{pollsess.id}}" class="btn btn-primary btn-lg" role="button"
                             aria-pressed="true">View</a>
                     </div>
@@ -35,17 +44,17 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal for license -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div>status: active</div>
+                    <h3>status: active</h3>
 
-                    <div style="width: 100%;" class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-primary">Request</button>
-                        <button type="button" class="btn btn-primary">Connect</button>
+                    <div style="width: 100%; margin-top: 50px; display: flex;justify-content: space-around;">
+                        <button type="button" class="btn btn-primary" (click)="requestLicense()">Request</button>
+                        <button type="button" class="btn btn-primary" (click)="connectLicense()">Connect</button>
                     </div>
                 </div>
             </div>
