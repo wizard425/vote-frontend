@@ -168,6 +168,16 @@ export class PollService {
     }
   }
 
+  deletePoll(psId: any, pollId: any) {
+    console.log(pollId);
+    let ps = this.pollsessions.find(x => x.id == psId);
+    let index = -1;
+    if (ps) {
+      index = this.pollsessions.indexOf(ps);
+      this.pollsessions[index].polls = ps.polls.filter(x => x.id != pollId);
+    }
+  }
+
   get emptyPollSession() {
     return {
       id: "",

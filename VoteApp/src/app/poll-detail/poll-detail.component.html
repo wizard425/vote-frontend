@@ -24,8 +24,7 @@
 
         <div class="form-group">
             <label for="multipleChoice">Mode</label>
-            <select class="form-control" formControlName="multipleChoice"
-                placeholder="Mode">
+            <select class="form-control" formControlName="multipleChoice" placeholder="Mode">
                 <option value="false">Single-choice</option>
                 <option value="true">Multiple choice</option>
             </select>
@@ -48,15 +47,14 @@
         </div>
 
         <div class="row">
-            <button type="button" class="btn btn-default col-md-1 col-md-offset-11"
-                (click)="addChoiceControl()">
+            <button type="button" class="btn btn-default col-md-1 col-md-offset-11" (click)="addChoiceControl()">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
         </div>
         <!--<button type="submit" class="btn btn-primary">Submit</button>-->
     </form>
-    <button (click)="addPoll()">Submit</button>
-    <form action="">
-        <button class="btn btn-danger">Delete</button>
-    </form>
+    <div class="row">
+        <button class="btn btn-danger  col-md-offset-10 col-md-1" (click)="deletePoll()">Delete</button>
+        <button class="btn btn-success col-md-1 ml-10" (click)="addPoll()">Submit</button>
+    </div>
 </div>

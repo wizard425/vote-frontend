@@ -78,8 +78,11 @@ export class PollDetailComponent extends BaseComponent implements OnInit {
     this.loc.back();
   }
 
-  getPollFromForm() {
+  deletePoll() {
+    console.log(this.activatedRoute.snapshot.params.pollId);
 
+    this.pollService.deletePoll(this.activatedRoute.snapshot.params.id, this.activatedRoute.snapshot.params.pollid);
+    this.loc.back();
   }
 
   setChoices() {
