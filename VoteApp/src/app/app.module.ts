@@ -11,6 +11,8 @@ import { PollSessionDetailComponent } from './poll-session-detail/poll-session-d
 import { PollSessionsComponent } from './poll-sessions/poll-sessions.component';
 import { VoteComponent } from './vote/vote.component';
 import { PollDetailComponent } from './poll-detail/poll-detail.component';
+import { AddUsersComponent } from './poll-session-detail/add-users/add-users.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,15 @@ import { PollDetailComponent } from './poll-detail/poll-detail.component';
     PollSessionDetailComponent,
     PollSessionsComponent,
     VoteComponent,
-    PollDetailComponent
+    PollDetailComponent,
+    AddUsersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

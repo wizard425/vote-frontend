@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
+import { Choice } from '../models/pollsession';
 import { PollService } from '../services/poll.service';
+import { Location } from '@angular/common'
+
+
+
 
 @Component({
   selector: 'vo-poll-detail',
@@ -10,12 +16,18 @@ import { PollService } from '../services/poll.service';
 })
 export class PollDetailComponent extends BaseComponent implements OnInit {
 
+  form: FormGroup;
+  choices: FormArray = new FormArray([]);
+
   poll: any;
   isNew: boolean = true;
 
   constructor(private pollService: PollService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private loc: Location) {
     super();
+    this.form = this.fb.group({});
   }
 
   ngOnInit(): void {
@@ -24,6 +36,7 @@ export class PollDetailComponent extends BaseComponent implements OnInit {
       if (pollFromServcie) {
         this.isNew = false;
         this.poll = pollFromServcie;
+        this.setChoices();
       } else {
         this.poll =
         {
@@ -41,14 +54,54 @@ export class PollDetailComponent extends BaseComponent implements OnInit {
             text: ""
           }]
         };
+        this.setChoices();
       }
     })
+    this.form = this.fb.group({
+      id: this.poll.id,
+      title: this.poll.title,
+      status: this.poll.status,
+      multipleChoice: this.poll.multipleChoice,
+      choices: this.choices
+    });
   }
 
   removeItem(index: number) {
-    console.log("hier");
     this.poll?.choices.splice(index, 1);
-    console.log(this.poll?.choices);
   }
 
+  addPoll() {
+    let poll = this.form.value;
+    poll.multipleChoice = this.form.value == 'true';
+    this.form.value == false;
+    this.pollService.addPoll(this.activatedRoute.snapshot.params.id, this.form.value);
+    this.loc.back();
+  }
+
+  getPollFromForm() {
+
+  }
+
+  setChoices() {
+    for (let i of this.poll.choices) {
+      this.choices.push(this.newPollFormControl(i))
+    }
+  }
+
+  newPollFormControl(c: Choice): FormGroup {
+    return new FormGroup({
+      'id': new FormControl(c.id),
+      'text': new FormControl(c.text)
+    });
+  }
+
+  addChoiceControl() {
+    console.log("add");
+    this.choices.push(this.newPollFormControl(new Choice()));
+    console.log(this.choices);
+  }
+
+  removeChoiceControl(i: number) {
+    this.choices.removeAt(i);
+  }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Poll, PollSession } from '../models/pollsession';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class PollService {
 
 
   // pollsessions and users = exampledata
-  pollsessions = [
+  pollsessions: PollSession[] = [
     {
       id: "1234557",
       date: new Date(),
@@ -52,26 +53,30 @@ export class PollService {
           }]
         }
       ],
-      status: 'ended',
+      users: [],
+      status: 2,
 
     },
     {
       id: "12345",
       date: new Date(),
       polls: [],
-      status: 'ended'
+      status: 2,
+      users: []
     },
     {
       id: "7654321",
       date: new Date(),
       polls: [],
-      status: 'ended'
+      status: 1,
+      users: []
     },
     {
       id: "87878787",
       date: new Date(),
       polls: [],
-      status: 'open'
+      status: 1,
+      users: []
     },
     {
       id: "123456711",
@@ -79,37 +84,44 @@ export class PollService {
       polls: [{
         id: "002433",
         title: "Who is the best?",
+        choices: [],
+        multipleChoice: false,
         status: 2
       },
       {
         id: "002343",
         title: "Find the right sentence",
+        choices: [],
+        multipleChoice: false,
         status: 2
       },
       {
         id: "0044423",
         title: "Choose all animals",
+        choices: [],
+        multipleChoice: false,
         status: 1
       }],
+      users: [1, 2],
       status: 1
     }
   ]
 
   users = [
     {
-      id: "123",
+      id: "1",
       username: "User 1"
     },
     {
-      id: "123",
+      id: "2",
       username: "User 2"
     },
     {
-      id: "123",
+      id: "3",
       username: "User 3"
     },
     {
-      id: "123",
+      id: "4",
       username: "User 4"
     }
   ];
@@ -123,7 +135,11 @@ export class PollService {
     return this.pollsessions.find(x => x.id == id);
   }
 
-  getUserOfPollSession(id: string){
+  getUserOfPollSession(id: string) {
+    return this.users;
+  }
+
+  getAllUsers() {
     return this.users;
   }
 
@@ -132,13 +148,33 @@ export class PollService {
     return sess?.polls.find(x => x.id == pollid);
   }
 
+  addPollSession(ps: any) {
+    this.pollsessions.push(ps);
+  }
+
+  addPoll(psId: any, poll: Poll) {
+    poll.id = new Date().toString();
+    console.log(poll);
+    (this.pollsessions.find(x => x.id == psId))?.polls.push(poll);
+  }
+
+  updatePoll(psId: any, poll: Poll) {
+    let ps = this.pollsessions.find(x => x.id == psId);
+    if (ps) {
+      let index = this.pollsessions.indexOf(ps)
+      let indexPoll = this.pollsessions[index].polls.find(x => x.id == poll.id)
+
+      //this.pollsessions[index].polls = poll;
+    }
+  }
+
   get emptyPollSession() {
     return {
       id: "",
       date: new Date(),
       polls: [],
-      status: 'created'
+      status: 1,
+      users: []
     };
   }
-
 }

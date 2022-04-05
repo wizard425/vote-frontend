@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { PollDetailComponent } from './poll-detail/poll-detail.component';
+import { AddUsersComponent } from './poll-session-detail/add-users/add-users.component';
 import { PollSessionDetailComponent } from './poll-session-detail/poll-session-detail.component';
 import { PollSessionsComponent } from './poll-sessions/poll-sessions.component';
 import { RegisterComponent } from './register/register.component';
@@ -38,12 +39,20 @@ const routes: Routes = [
         component: PollSessionDetailComponent
       },
       {
+        path: "add/users",
+        component: AddUsersComponent
+      },
+      {
         path: ":id/add",
         component: PollDetailComponent
       },
       {
         path: ":id",
         component: PollSessionDetailComponent
+      },
+      {
+        path: ":id/users",
+        component: AddUsersComponent
       },
       {
         path: ":id/edit/:pollid",

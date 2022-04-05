@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PollService } from 'src/app/services/poll.service';
 import { BaseComponent } from '../base/base.component';
+import { PollSession } from '../models/pollsession';
 
 @Component({
   selector: 'vo-poll-session-detail',
@@ -11,7 +12,7 @@ import { BaseComponent } from '../base/base.component';
 export class PollSessionDetailComponent extends BaseComponent implements OnInit {
 
   isNew: boolean = true;
-  pollsession: any;
+  pollsession: PollSession = this.pollService.emptyPollSession;
   users: any;
   allUsers: any;
 
