@@ -21,7 +21,6 @@ export class VoteComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(route => {
       this.poll = this.pollService.getPoll(route.id, route.pollid);
-      console.log(this.poll);
     })
   }
 

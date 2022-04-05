@@ -5,6 +5,7 @@ import { BaseComponent } from '../base/base.component';
 import { Choice } from '../models/pollsession';
 import { PollService } from '../services/poll.service';
 import { Location } from '@angular/common'
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -59,7 +60,7 @@ export class PollDetailComponent extends BaseComponent implements OnInit {
     })
     this.form = this.fb.group({
       id: this.poll.id,
-      title: this.poll.title,
+      title: { value: this.poll.title, disabled: !this.isNew },
       status: this.poll.status,
       multipleChoice: this.poll.multipleChoice,
       choices: this.choices
@@ -73,14 +74,16 @@ export class PollDetailComponent extends BaseComponent implements OnInit {
   addPoll() {
     let poll = this.form.value;
     poll.multipleChoice = this.form.value == 'true';
-    this.form.value == false;
-    this.pollService.addPoll(this.activatedRoute.snapshot.params.id, this.form.value);
+    if (poll.id == "") {
+      poll.id = uuidv4();
+      this.form.value == false;
+      this.pollService.addPoll(this.activatedRoute.snapshot.params.id, poll);
+    } else
+      this.pollService.updatePoll(this.activatedRoute.snapshot.params.id, poll)
     this.loc.back();
   }
 
   deletePoll() {
-    console.log(this.activatedRoute.snapshot.params.pollId);
-
     this.pollService.deletePoll(this.activatedRoute.snapshot.params.id, this.activatedRoute.snapshot.params.pollid);
     this.loc.back();
   }
@@ -99,9 +102,7 @@ export class PollDetailComponent extends BaseComponent implements OnInit {
   }
 
   addChoiceControl() {
-    console.log("add");
     this.choices.push(this.newPollFormControl(new Choice()));
-    console.log(this.choices);
   }
 
   removeChoiceControl(i: number) {

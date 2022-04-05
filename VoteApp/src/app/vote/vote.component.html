@@ -9,14 +9,12 @@
                     <div class="radio">
                         <!--radio button if poll is single-choice-->
                         <label *ngIf="!poll.multipleChoice">
-                            <input type="radio" name="{{poll.multipleChoice ? ans.id : 1}}" id="radio{{ans.id}}"
-                                [disabled]="submitted">
+                            <input type="radio" name="{{poll.multipleChoice ? ans.id : 1}}" [disabled]="submitted">
                             {{ans.text}}
                         </label>
                         <!--checkbox if poll is multiplechoice-->
                         <label *ngIf="poll.multipleChoice">
-                            <input type="checkbox" name="{{poll.multipleChoice ? ans.id: 1}}" id="radio{{ans.id}}"
-                                [disabled]="submitted">
+                            <input type="checkbox" name="{{poll.multipleChoice ? ans.id: 1}}" [disabled]="submitted">
                             {{ans.text}}
                         </label>
                     </div>

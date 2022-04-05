@@ -53,9 +53,8 @@ export class PollService {
           }]
         }
       ],
-      users: [],
+      users: [1, 2],
       status: 2,
-
     },
     {
       id: "12345",
@@ -135,10 +134,6 @@ export class PollService {
     return this.pollsessions.find(x => x.id == id);
   }
 
-  getUserOfPollSession(id: string) {
-    return this.users;
-  }
-
   getAllUsers() {
     return this.users;
   }
@@ -153,8 +148,6 @@ export class PollService {
   }
 
   addPoll(psId: any, poll: Poll) {
-    poll.id = new Date().toString();
-    console.log(poll);
     (this.pollsessions.find(x => x.id == psId))?.polls.push(poll);
   }
 
@@ -169,13 +162,35 @@ export class PollService {
   }
 
   deletePoll(psId: any, pollId: any) {
-    console.log(pollId);
     let ps = this.pollsessions.find(x => x.id == psId);
     let index = -1;
     if (ps) {
       index = this.pollsessions.indexOf(ps);
       this.pollsessions[index].polls = ps.polls.filter(x => x.id != pollId);
     }
+  }
+
+  addUserToPollSession(pollSessionId: any, ids: any[]) {
+    let pollS = this.pollsessions.find(x => x.id == pollSessionId);
+    let index = -1;
+    if (pollS)
+      index = this.pollsessions.indexOf(pollS);
+
+    this.pollsessions[index].users = ids;
+  }
+
+  getAllUsersFromPollSession(pollSessionId: any) {
+    let ret = [];
+    let sessionUsers: number[] = [];
+    let uZw = this.pollsessions.find(x => x.id == pollSessionId)?.users;
+    if (uZw)
+      sessionUsers = uZw;
+    let allUser = this.users;
+    if (sessionUsers)
+      for (let i = 0; i < sessionUsers?.length; i++) {
+        ret.push(allUser.find(x => x.id == sessionUsers[i].toString()));
+      }
+    return ret;
   }
 
   get emptyPollSession() {

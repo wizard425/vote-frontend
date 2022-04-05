@@ -11,14 +11,12 @@
                 <div *ngFor="let user of allusers" class="top7" style="height: 50px;">
                     <div class="d-flex justify-content-around spacing">
                         <label>
-                            <input type="checkbox" name="{{user.id}}">
+                            <input type="checkbox" name="{{user.id}}" id="{{user.id}}" (change)="updateChange(user, $event)" [checked]="checkedUser.includes(user)">
                             {{user.username}}
                         </label>
-
-                        <div class="col-sm-4 vcenter">{{user.username}}</div>
                     </div>
                 </div>
-                <button type="submit">Add User</button>
+                <button type="submit" class="btn btn-success" (click)="save()">Add User</button>
             </form>
         </div>
     </div>

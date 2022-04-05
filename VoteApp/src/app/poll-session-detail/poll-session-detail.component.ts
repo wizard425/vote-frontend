@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PollService } from 'src/app/services/poll.service';
 import { BaseComponent } from '../base/base.component';
 import { PollSession } from '../models/pollsession';
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 @Component({
   selector: 'vo-poll-session-detail',
@@ -16,21 +19,36 @@ export class PollSessionDetailComponent extends BaseComponent implements OnInit 
   users: any;
   allUsers: any;
 
+  status = [
+    "Created",
+    "Started",
+    "Closed",
+    "Tallied"
+  ]
+
   constructor(private pollService: PollService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
     super();
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       let pollSess = this.pollService.getPollSessionById(res.id);
-      if(pollSess){
+      if (pollSess) {
         this.pollsession = pollSess;
-        this.users = this.pollService.getUserOfPollSession(res.id);
+        this.users = this.pollService.getAllUsersFromPollSession(res.id);
         this.isNew = false;
-      }else{
+      } else {
         this.pollsession = this.pollService.emptyPollSession;
       }
     })
+  }
+
+  createPollSession() {
+    let newPS = new PollSession();
+    newPS.id = uuidv4();
+    this.pollService.addPollSession(newPS);
+    this.router.navigate(["/home"]);
   }
 }
