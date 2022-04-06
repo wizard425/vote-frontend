@@ -196,7 +196,6 @@ export class PollService {
     user.id = uuidv4();
     this.users.push(user);
     localStorage.setItem("users", JSON.stringify(this.users));
-    console.log(this.users);
   }
 
   isLoggedIn() {
@@ -212,7 +211,6 @@ export class PollService {
       let u = JSON.parse(ustring);
       for (let user of u) {
         if (user.username == username && user.password == password) {
-          console.log(user);
           return user;
         }
       }

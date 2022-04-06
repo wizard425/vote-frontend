@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   login() {
     let pwd = (<HTMLInputElement>document.getElementById("password")).value;
     let uname = (<HTMLInputElement>document.getElementById("username")).value;
-    console.log("here");
     if (this.pollService.authenticate(uname, pwd)?.isManager == true) {
       this.router.navigate(["home"]);
       localStorage.setItem("ismanager", "true");

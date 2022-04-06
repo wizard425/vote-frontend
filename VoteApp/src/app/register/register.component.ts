@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
   }
 
   signup() {
-    console.log("hier")
     if (this.form.valid) {
       if (this.form.controls.password.value == this.form.controls.passwordVerify.value) {
         let user = this.form.value;
