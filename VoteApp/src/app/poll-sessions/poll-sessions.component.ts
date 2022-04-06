@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 import { PollService } from '../services/poll.service';
 
@@ -9,9 +10,9 @@ import { PollService } from '../services/poll.service';
 })
 export class PollSessionsComponent extends BaseComponent implements OnInit {
 
-  pollsessions : any;
+  pollsessions: any;
 
-  constructor(private pollService: PollService) {
+  constructor(private pollService: PollService, private router: Router) {
     super();
   }
 
@@ -19,13 +20,18 @@ export class PollSessionsComponent extends BaseComponent implements OnInit {
     this.pollsessions = this.pollService.getAllPollSessions();
   }
 
+  logout() {
+    localStorage.removeItem("ismanager");
+    this.router.navigate(["welcome"]);
+  }
+
   // gets called when user opens license-modal and clicks Request
-  requestLicense(){
+  requestLicense() {
 
   }
 
   // gets called when user opens license-modal and clicks Connect
-  connectLicense(){
+  connectLicense() {
 
   }
 

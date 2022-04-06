@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Poll, PollSession } from '../models/pollsession';
+import { User } from '../models/user';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Injectable({
   providedIn: 'root'
@@ -106,23 +109,19 @@ export class PollService {
     }
   ]
 
-  users = [
+  users: User[] = [
     {
       id: "1",
-      username: "User 1"
+      username: "voter",
+      password: "test",
+      isManager: false
     },
     {
       id: "2",
-      username: "User 2"
+      username: "manager",
+      password: "test",
+      isManager: true
     },
-    {
-      id: "3",
-      username: "User 3"
-    },
-    {
-      id: "4",
-      username: "User 4"
-    }
   ];
   constructor(private http: HttpClient) { }
 
@@ -191,6 +190,34 @@ export class PollService {
         ret.push(allUser.find(x => x.id == sessionUsers[i].toString()));
       }
     return ret;
+  }
+
+  addUser(user: User) {
+    user.id = uuidv4();
+    this.users.push(user);
+    localStorage.setItem("users", JSON.stringify(this.users));
+    console.log(this.users);
+  }
+
+  isLoggedIn() {
+    let managerstate = localStorage.getItem("ismanager");
+    if (managerstate)
+      return true;
+    return false;
+  }
+
+  authenticate(username: string, password: string): User | null {
+    let ustring = localStorage.getItem("users");
+    if (ustring) {
+      let u = JSON.parse(ustring);
+      for (let user of u) {
+        if (user.username == username && user.password == password) {
+          console.log(user);
+          return user;
+        }
+      }
+    }
+    return null;
   }
 
   get emptyPollSession() {

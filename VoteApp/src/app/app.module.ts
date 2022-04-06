@@ -13,6 +13,8 @@ import { VoteComponent } from './vote/vote.component';
 import { PollDetailComponent } from './poll-detail/poll-detail.component';
 import { AddUsersComponent } from './poll-session-detail/add-users/add-users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginActivate } from './base/loggedin.guard';
+import { NotLoggedInActivate } from './base/notlogged.guard';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [LoginActivate, NotLoggedInActivate],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

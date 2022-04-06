@@ -4,7 +4,7 @@
         <h2 class="col-md-5">{{ isManager ? "ManagerPage" : "UserPage"}}</h2>
 
         <!--License Button-->
-        <div class="panel panel-default w-25 col-md-3 col-md-offset-4" style="margin-top: 10px;" *ngIf="!isManager">
+        <div class="panel panel-default w-25 col-md-3 col-md-offset-3" style="margin-top: 10px;" *ngIf="!isManager">
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-8">License State</div>
@@ -14,6 +14,12 @@
                         </button></div>
                 </div>
             </div>
+        </div>
+        <div style="margin-top: 15px;" class="col-md-1">
+            <div><button class="btn btn-danger vcenter" (click)="logout()" *ngIf="!isManager">Log out</button></div>
+        </div>
+        <div class="col-md-1 col-md-offset-6" *ngIf="isManager">
+            <div><button class="btn btn-danger vcenter" (click)="logout()">Log out</button></div>
         </div>
     </div>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PollService } from '../services/poll.service';
 
 @Component({
   selector: 'vo-login',
@@ -8,20 +9,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  users = [
-    {
-      username: "voter",
-      password: "test",
-      ismanager: false
-    },
-    {
-      username: "manager",
-      password: "test",
-      ismanager: true
-    }
-  ]
-
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private pollService: PollService) { }
 
   ngOnInit(): void {
   }
@@ -29,13 +18,15 @@ export class LoginComponent implements OnInit {
   login() {
     let pwd = (<HTMLInputElement>document.getElementById("password")).value;
     let uname = (<HTMLInputElement>document.getElementById("username")).value;
-
-    if (uname == "voter" && pwd == "test") {
-      this.router.navigate(["home"]);
-      localStorage.setItem("ismanager", "false");
-    } else if (uname == "manager" && pwd == "test") {
+    console.log("here");
+    if (this.pollService.authenticate(uname, pwd)?.isManager == true) {
       this.router.navigate(["home"]);
       localStorage.setItem("ismanager", "true");
+    } else if (this.pollService.authenticate(uname, pwd)?.isManager == false) {
+      this.router.navigate(["home"]);
+      localStorage.setItem("ismanager", "false");
+    } else {
+      alert("Password or Username incorrect");
     }
   }
 

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginActivate } from './base/loggedin.guard';
+import { NotLoggedInActivate } from './base/notlogged.guard';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { PollDetailComponent } from './poll-detail/poll-detail.component';
@@ -21,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [NotLoggedInActivate]
   },
   {
     path: "signup",
@@ -29,6 +32,7 @@ const routes: Routes = [
   },
   {
     path: "home",
+    canActivate: [LoginActivate],
     children: [
       {
         path: "",

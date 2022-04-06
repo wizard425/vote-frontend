@@ -1,24 +1,24 @@
-<div class="login-form">
-  <form action="actionToCreateUser" method="post">
+<div class="login-form" >
+  <form [formGroup]="form">
     <h2 class="text-center">Signup</h2>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Username" required="required" id="username" name="username">
+      <input type="text" class="form-control" placeholder="Username" formControlName="username" id="username" name="username">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" placeholder="Password" required="required" id="password"
+      <input type="password" class="form-control" placeholder="Password"formControlName="password" id="password"
         name="password">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" placeholder="Verify Password" required="required">
+      <input type="password" class="form-control" placeholder="Verify Password" formControlName="passwordVerify" required="required">
     </div>
     <div class="form-group">
-      <select class="form-control" name="ismanager" id="ismanager">
-        <option value="true">Manager</option>
-        <option value="false">Voter</option>
+      <select class="form-control" name="ismanager" id="ismanager" formControlName="isManager">
+        <option value=true>Manager</option>
+        <option value=false>Voter</option>
       </select>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+      <button class="btn btn-primary btn-block" (click)="signup()">Sign Up</button>
     </div>
   </form>
   <p class="text-center"><a routerLink="/login">Login</a></p>
